@@ -36,14 +36,16 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
 
     'bootstrap5',
     'crispy_forms',
     'crispy_bootstrap5',
-
+    'cloudinary',
 
     'main.apps.MainConfig',
+    'photos.apps.PhotosConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,5 +133,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS=['https://panoptikum-project.herokuapp.com']
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':  os.environ.get('CLOUDINARY_CLOUD_NAME', 'hcr7x2ija'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '678377257426454'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'pq11MzR-ovLqXoASlRAKbcAEX8o'),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 import django_heroku
 django_heroku.settings(locals())
