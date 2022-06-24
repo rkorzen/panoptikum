@@ -5,5 +5,5 @@ django-heroku
 django-bootstrap-v5
 django-crispy-forms
 crispy-bootstrap5
-cloudinary==1.17.0
-django-cloudinary-storage==0.2.3
+cloudinary
+django-cloudinary-storage

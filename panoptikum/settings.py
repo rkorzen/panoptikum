@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
+import cloudinary
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -26,7 +26,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY", 'django-insecure-6g@&b&g=es^8uz4@o^wqo
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -78,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'panoptikum.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -88,7 +86,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -108,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -120,26 +116,32 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CSRF_TRUSTED_ORIGINS=['https://panoptikum-project.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://panoptikum-project.herokuapp.com']
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME':  os.environ.get('CLOUDINARY_CLOUD_NAME', 'hcr7x2ija'),
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'hcr7x2ija'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '678377257426454'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'pq11MzR-ovLqXoASlRAKbcAEX8o'),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+cloudinary.config(
+    cloud_name="hcr7x2ija",
+    api_key="678377257426454",
+    api_secret="pq11MzR-ovLqXoASlRAKbcAEX8o"
+)
+
 import django_heroku
+
 django_heroku.settings(locals())
