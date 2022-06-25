@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load cloudinary %}
+{% block content %}
+    {% for g in galleries %}
+        <div class="col-lg-3">
+            <p class="text-center">
+            <img src="{% cloudinary_url g.cover width=200 height=200 %}">
+            </p>
+            <p class="text-center">{{ g.name }}</p>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
